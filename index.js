@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute } from 'react-router'
 import bootstrap from 'react-bootstrap'
-//fdfd
 
 
 //Components:
@@ -23,7 +22,6 @@ export default class App extends Component{
 
     return(
       <div>
-        {/*<Modal />*/}
          <Header />
          <Slider />
          <br/><br/><br/>
