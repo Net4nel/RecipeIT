@@ -1,20 +1,10 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import { Router, Route, IndexRoute } from 'react-router'
-import bootstrap from 'react-bootstrap'
-
-
+import React, {Component} from "react";
+import ReactDOM from "react-dom";
 //Components:
-import Home from './components/Home/Home'
-import Header from './components/Header/Header'
-import SideNav from './components/SideNav/SideNav'
-import Slider from './components/Slider/Slider'
-import Modal from './components/Modal/Modal'
-
+import Header from "./components/Header/Header";
+import SideNav from "./components/SideNav/SideNav";
+import Slider from "./components/Slider/Slider";
 //Pages:
-import HomePage from './pages/HomePage'
-import About from './pages/About'
-import Preferences from './pages/Preferences'
 
 
 export default class App extends Component{
@@ -25,10 +15,23 @@ export default class App extends Component{
          <Header />
          <Slider />
          <br/><br/><br/>
+
          <SideNav />
       </div>
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
