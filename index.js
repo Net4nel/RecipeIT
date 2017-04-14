@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import Header from "./components/Header/Header";
 import SideNav from "./components/SideNav/SideNav";
 import Slider from "./components/Slider/Slider";
-import CreateRecipe from "./components/CreateRecipe/CreateRecipe";
 
 
 //Pages:
@@ -21,7 +20,6 @@ export default class App extends Component{
 
          <SideNav />
 
-         <CreateRecipe/>
       </div>
     );
   }

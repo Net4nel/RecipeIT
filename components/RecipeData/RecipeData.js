@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {Button, ControlLabel, FormControl, FormGroup, HelpBlock, Radio} from "react-bootstrap";
 
 
-export default class CreateRecipe extends Component{
+export default class RecipeData extends Component{
+
 
     render(){
 
@@ -89,4 +90,3 @@ export default class CreateRecipe extends Component{
 
     }
 }
-
