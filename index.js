@@ -20,6 +20,7 @@ export default class App extends Component{
          <Slider />
          <br/><br/><br/>
 
+          <RecipeData />
          <SideNav />
 
       </div>
