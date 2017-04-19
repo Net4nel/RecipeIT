@@ -1,15 +1,13 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import {hashHistory, Route, Router} from "react-router";
+import {hashHistory, Router} from "react-router";
+// Router:
+import routes from "./routes/routes";
 //Components:
-import Header from "./components/Header/Header";
-import SideNav from "./components/SideNav/SideNav";
-import Slider from "./components/Slider/Slider";
-import ModalNewRecipe from "./components/ModalNewRecipe/ModalNewRecipe";
-import RecipeData from "./components/RecipeData/RecipeData";
+import Header from "./components/common/Header";
+
 
 //Pages:
-
 
 export default class App extends Component{
   render(){
@@ -17,11 +15,9 @@ export default class App extends Component{
     return(
       <div>
          <Header />
-         <Slider />
-         <br/><br/><br/>
-
-         <SideNav />
-          {this.props.children}
+          <div id="view">
+              {this.props.children}
+          </div>
       </div>
     );
   }
@@ -35,11 +31,11 @@ export default class App extends Component{
 const root = document.getElementById('root');
 ReactDOM.render(
     (
-     <Router history={hashHistory}>
-         <Route path="/" component={App}>
-            <Route path="/Tips" component={ModalNewRecipe}/>
-            <Route path="/About" component={RecipeData}/>
-         </Route>
+     <Router history={hashHistory} component={App} routes={routes}>
+         {/*<Route path="/" component={HomePage}>*/}
+            {/*<Route path="/tips" component={}/>*/}
+            {/*<Route path="/about" component={}/>*/}
+         {/*</Route>*/}
      </Router>
     )
     ,root)
