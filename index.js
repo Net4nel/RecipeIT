@@ -20,9 +20,8 @@ export default class App extends Component{
          <Slider />
          <br/><br/><br/>
 
-          <RecipeData />
          <SideNav />
-
+          {this.props.children}
       </div>
     );
   }
@@ -42,9 +41,5 @@ ReactDOM.render(
             <Route path="/About" component={RecipeData}/>
          </Route>
      </Router>
-
     )
-
-
-
     ,root)
