@@ -31,7 +31,7 @@ export default class App extends Component{
 const root = document.getElementById('root');
 ReactDOM.render(
     (
-     <Router history={hashHistory} component={App} routes={routes}>
+     <Router history={hashHistory} routes={routes}>
          {/*<Route path="/" component={HomePage}>*/}
             {/*<Route path="/tips" component={}/>*/}
             {/*<Route path="/about" component={}/>*/}

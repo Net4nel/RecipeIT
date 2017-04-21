@@ -1,11 +1,13 @@
 import React from "react";
-import {Route} from "react-router";
+import {IndexRoute, Route} from "react-router";
 
-import HomePage from "../components/home/container/HomePage";
+import App from "components/App";
+import HomePage from "components/home/container/HomePage";
 
 export default (
-    <Route path="/" component={HomePage}>
-    {/*<Route path="/tips" component={}>*/}
+    <Route path="/" component={App}>
+        <IndexRoute component={HomePage}/>
+        {/*<Route path="/tips" component={Recipe}/>*/}
     </Route>
 );
 
