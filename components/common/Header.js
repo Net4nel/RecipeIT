@@ -22,7 +22,7 @@ export default class Header extends Component{
                 </Navbar.Header>
                 <Nav>
                   <NavItem eventKey={1} href="#">דף הבית</NavItem>
-                  <NavItem eventKey={2} href="#tips">טיפים</NavItem>
+                  <NavItem eventKey={2} href="#newRecipe">מתכון חדש</NavItem>
                   <NavItem eventKey={2} href="#about">קצת עלינו</NavItem>
                   <NavDropdown eventKey={3} title="ניווט מהיר" id="basic-nav-dropdown">
                     <MenuItem eventKey={3.1} href="#recipes">המתכונים שלנו</MenuItem>

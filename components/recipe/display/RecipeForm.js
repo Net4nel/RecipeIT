@@ -29,7 +29,7 @@ const RecipeForm = (props) => {
                     <div className="key-words-wrapper row">
                         <ul className="key-words-list">
                             {keyWords.map((keyword,i)=>{
-                                return <li key={i}>{keyword}</li>
+                                return <li key={i}>{keyword} <a onClick={()=>{props.removeByName('keywords',i)}}>x</a></li>
                             })}
                         </ul>
                     </div>
@@ -41,7 +41,7 @@ const RecipeForm = (props) => {
                     <div className="ingredients-wrapper row">
                         <ul className="ingredients-list">
                             {ingredients.map((ingredient,i)=>{
-                                return <li key={i}>{ingredient}</li>
+                                return <li key={i}>{ingredient} <a onClick={()=>{props.removeByName('ingredients',i)}}>x</a></li>
                             })}
                         </ul>
                     </div>
@@ -53,7 +53,7 @@ const RecipeForm = (props) => {
                     <div className="steps-wrapper row">
                         <ol className="steps-list">
                             {steps.map((step,i)=>{
-                                return <li key={i}>{step}</li>
+                                return <li key={i}>{step} <a onClick={()=>{props.removeByName('steps',i)}}>x</a></li>
                             })}
                         </ol>
                     </div>
@@ -77,7 +77,8 @@ RecipeForm.propTypes = {
     tempStep: PropTypes.String,
     tempKeyWord: PropTypes.String,
     tempIngredient: PropTypes.String,
-    title: PropTypes.String
+    title: PropTypes.String,
+    removeByName: PropTypes.Function
 };
 
 export default RecipeForm;

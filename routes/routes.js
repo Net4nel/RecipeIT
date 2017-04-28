@@ -8,7 +8,7 @@ import Recipe from "components/recipe/container/Recipe";
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={HomePage}/>
-        <Route path="/tips" component={Recipe}/>
+        <Route path="/newRecipe" component={Recipe}/>
     </Route>
 );
 

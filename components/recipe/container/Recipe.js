@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from "axios";
 import Form from "../display/RecipeForm";
 
 export default class Recipe extends Component {
@@ -18,10 +19,32 @@ export default class Recipe extends Component {
         this.addKeyWord = this.addKeyWord.bind(this);
         this.addIngredients = this.addIngredients.bind(this);
         this.addStep = this.addStep.bind(this);
+        this.removeByName = this.removeByName.bind(this);
+    }
+
+    /**
+     * @TODO: finish submit function, add validations.
+     */
+    onSubmit() {
+        let url = '/recipe';
+
+        let valid = true;
+
+        let level = this.steps.length;
+
+        let data = {
+            title : this.state.title,
+            keyWords: this.state.keyWords ,
+            level: level
+        };
+        if (valid) {
+            axios.post(url, {data:data}).then((response)=>{
+                console.log('added new recipe');
+            })
+        }
     }
 
     onChange(e) {
-        debugger;
         let input = e.target;
         let name = input.getAttribute('name');
         switch (name) {
@@ -43,6 +66,33 @@ export default class Recipe extends Component {
             case 'tempKeyWord':
                 this.setState({
                     tempKeyword: input.value
+                });
+                break;
+        }
+    }
+
+    removeByName(name,i) {
+        let tempArray;
+        switch (name) {
+            case 'steps':
+                tempArray = [...this.state.steps];
+                tempArray.splice(i,1);
+                this.setState({
+                    steps: tempArray
+                });
+                break;
+            case 'ingredients':
+                tempArray = [...this.state.ingredients];
+                tempArray.splice(i,1);
+                this.setState({
+                    ingredients: tempArray
+                });
+                break;
+            case 'keywords':
+                tempArray = [...this.state.keyWords];
+                tempArray.splice(i,1);
+                this.setState({
+                    keyWords: tempArray
                 });
                 break;
         }
@@ -98,6 +148,7 @@ export default class Recipe extends Component {
                     addStep={this.addStep}
                     onChange={this.onChange}
                     title={this.state.title}
+                    removeByName={this.removeByName}
                 />
             </div>
         );
