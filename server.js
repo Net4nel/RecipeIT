@@ -1,3 +1,5 @@
+// require('./api/db.js');
+
 // Connect to webpack
 var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
@@ -8,14 +10,14 @@ var config = require('./webpack.config')
 var express = require('express');
 var app = express();
 // var bodyParser = require('body-parser');
-// var mongoose = require('mongoose');
+ // var mongoose = require('mongoose');
 
-// app.use(bodyParser.json());
+ // app.use(bodyParser.json());
 
 //
 // // Connect to Mongoose
-// mongoose.connect('mongodb://localhost/');
-// var db = mongoose.connection;
+//  mongoose.connect('mongodb://localhost/');
+//  var db = mongoose.connection;
 
 
 

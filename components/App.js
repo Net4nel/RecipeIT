@@ -3,7 +3,6 @@ import React, {PropTypes} from "react";
 import Header from "./common/Header";
 
 
-
 class App extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -16,6 +15,7 @@ class App extends React.Component {
                 <div id="view">
                     {this.props.children}
                 </div>
+                {/*<Footer />*/}
             </div>
         );
     }

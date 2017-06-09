@@ -6,10 +6,10 @@ const RecipeForm = (props) => {
         <form>
             <div className="row">
                 <fieldset className="col-md-10">
-                    <legend>הזנת מתכון חדש</legend>
+                    <legend>New Recipe</legend>
                     <div className="input-wrapper row">
                         <div className="col-md-2">
-                            <label>שם המתכון</label>
+                            <label>Recipe Name:</label>
                         </div>
                         <div className="col-md-10">
                             <input name="title" value={props.title} onChange={props.onChange} type="text" className="form-control" />
@@ -17,7 +17,7 @@ const RecipeForm = (props) => {
                     </div>
                     <div className="input-wrapper row">
                         <div className="col-md-2">
-                            <label>הזן מילות מפתח</label>
+                            <label>Recipe Tags</label>
                         </div>
                         <div className="col-md-9">
                             <input name="tempKeyWord" value={props.tempKeyWord} onChange={props.onChange}  type="text" className="form-control" />
@@ -34,7 +34,7 @@ const RecipeForm = (props) => {
                         </ul>
                     </div>
                     <div className="input-wrapper row">
-                        <label>הזן מצרכים</label>
+                        <label>Ingredientes:</label>
                         <input name="tempIngredient" value={props.tempIngredient} onChange={props.onChange}  type="text" className="form-control" />
                         <input type="button" value="+" onClick={props.addIngredient}/>
                     </div>
@@ -46,7 +46,7 @@ const RecipeForm = (props) => {
                         </ul>
                     </div>
                     <div className="input-wrapper row">
-                        <label>הזן את שלבי המתכון</label>
+                        <label>Recipe Steps:</label>
                         <input name="tempStep" value={props.tempStep} onChange={props.onChange}  type="text" className="form-control" />
                         <input type="button" value="+" onClick={props.addStep} />
                     </div>
@@ -57,10 +57,26 @@ const RecipeForm = (props) => {
                             })}
                         </ol>
                     </div>
+
+                    <div className="input-wrapper row">
+                        <div className="col-md-3">
+                            Spicy <input type="checkbox" value="Spicy"/>
+                        </div>
+                        <div className="col-md-3">
+                            !Hot <input type="checkbox" value="Hot"/>
+                        </div>
+                        <div className="col-md-3">
+                            Veggie <input type="checkbox" value="Veggie"/>
+                        </div>
+                        <div className="col-md-3">
+                            Healthy <input type="checkbox" value="Healthy"/>
+                        </div>
+                    </div>
                 </fieldset>
+
             </div>
             <div className="row">
-                <input className="btn btn-success" type="button" value="שלח מתכון" />
+                <input className="btn btn-success" type="button" value="Send Recipe" />
             </div>
         </form>
     );
@@ -79,6 +95,7 @@ RecipeForm.propTypes = {
     tempIngredient: PropTypes.String,
     title: PropTypes.String,
     removeByName: PropTypes.Function
+    //highlightString: PropTypes.Function
 };
 
 export default RecipeForm;

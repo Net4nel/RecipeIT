@@ -20,6 +20,7 @@ export default class Recipe extends Component {
         this.addIngredients = this.addIngredients.bind(this);
         this.addStep = this.addStep.bind(this);
         this.removeByName = this.removeByName.bind(this);
+        this.highlightString = this.highlightString.bind(this);
     }
 
     /**
@@ -39,7 +40,7 @@ export default class Recipe extends Component {
         };
         if (valid) {
             axios.post(url, {data:data}).then((response)=>{
-                console.log('added new recipe');
+                console.log(response + 'added new recipe');
             })
         }
     }
@@ -123,6 +124,7 @@ export default class Recipe extends Component {
     addStep() {
         let steps = this.state.steps;
         let step = this.state.tempStep;
+        // highlightString(step, steps, Blue);
         if (!~steps.indexOf(step)) { // ~ indexOf returns true if exists false if not.
             this.setState({
                 steps: [...this.state.steps, step],
@@ -131,6 +133,14 @@ export default class Recipe extends Component {
         }
     }
 
+    highlightString(_str,_words,color) {
+        _words.forEach((word)=>{
+            let regex = RegExp(word,'gi');
+            _str = _str.replace(regex,'<span style="color:'+color+'">'+word+'</span>')
+        });
+
+        return _str;
+    }
 
     render() {
         let { steps, ingredients, keyWords} = this.state;
@@ -149,6 +159,7 @@ export default class Recipe extends Component {
                     onChange={this.onChange}
                     title={this.state.title}
                     removeByName={this.removeByName}
+                    highlightString={this.highlightString} ////
                 />
             </div>
         );
