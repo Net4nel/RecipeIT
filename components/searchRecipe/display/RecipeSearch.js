@@ -25,19 +25,20 @@ const RecipeSearch = (props) => {
 
             </div>
             <div className="row">
-                <input className="btn btn-success" type="button" value="Search For Recipe" />
+                <input className="btn btn-success" type="button" onClick={props.submitHandler} value="Search For Recipe" />
             </div>
         </form>
     );
 };
 
 RecipeSearch.propTypes = {
-    ingredients: PropTypes.Array,
-    addIngredient: PropTypes.Function,
-    onChange: PropTypes.Function,
-    tempIngredient: PropTypes.String,
-    title: PropTypes.String,
-    removeByName: PropTypes.Function
+    ingredients: PropTypes.array,
+    addIngredient: PropTypes.func,
+    onChange: PropTypes.func,
+    tempIngredient: PropTypes.string,
+    title: PropTypes.string,
+    removeByName: PropTypes.func,
+    submitHandler: PropTypes.func.isRequired
 };
 
 export default RecipeSearch;

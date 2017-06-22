@@ -1,4 +1,5 @@
 import React, {PropTypes} from "react";
+import ImageLoader from './ImageLoader';
 
 const RecipeForm = (props) => {
     let { steps, ingredients, keyWords} = props;
@@ -8,6 +9,9 @@ const RecipeForm = (props) => {
                 <fieldset className="col-md-10">
                     <legend>New Recipe</legend>
                     <div className="input-wrapper row">
+                        <ImageLoader 
+                            name={props.title} 
+                            addImageData={props.addImageData} />
                         <div className="col-md-2">
                             <label>Recipe Name:</label>
                         </div>
@@ -36,6 +40,7 @@ const RecipeForm = (props) => {
                     <div className="input-wrapper row">
                         <label>Ingredientes:</label>
                         <input name="tempIngredient" value={props.tempIngredient} onChange={props.onChange}  type="text" className="form-control" />
+                        <input name="tempIngredientAmount" value={props.tempIngredient} onChange={props.onChange}  type="text" className="form-control" />
                         <input type="button" value="+" onClick={props.addIngredient}/>
                     </div>
                     <div className="ingredients-wrapper row">
@@ -60,42 +65,43 @@ const RecipeForm = (props) => {
 
                     <div className="input-wrapper row">
                         <div className="col-md-3">
-                            Spicy <input type="checkbox" value="Spicy"/>
+                            Spicy <input type="checkbox" onChange={props.propertiesHandler} value="Spicy"/>
                         </div>
                         <div className="col-md-3">
-                            !Hot <input type="checkbox" value="Hot"/>
+                            !Hot <input type="checkbox" onChange={props.propertiesHandler} value="Hot"/>
                         </div>
                         <div className="col-md-3">
-                            Veggie <input type="checkbox" value="Veggie"/>
+                            Veggie <input type="checkbox" onChange={props.propertiesHandler} value="Veggie"/>
                         </div>
                         <div className="col-md-3">
-                            Healthy <input type="checkbox" value="Healthy"/>
+                            Healthy <input type="checkbox" onChange={props.propertiesHandler} value="Healthy"/>
                         </div>
                     </div>
                 </fieldset>
 
             </div>
             <div className="row">
-                <input className="btn btn-success" type="button" value="Send Recipe" />
+                <input className="btn btn-success" type="button" onClick={props.submitHandler} value="Send Recipe" />
             </div>
         </form>
     );
 };
 
 RecipeForm.propTypes = {
-    steps: PropTypes.Array,
-    ingredients: PropTypes.Array,
-    keyWords: PropTypes.Array,
-    addKeyWord: PropTypes.Function,
-    addIngredient: PropTypes.Function,
-    addStep: PropTypes.Function,
-    onChange: PropTypes.Function,
-    tempStep: PropTypes.String,
-    tempKeyWord: PropTypes.String,
-    tempIngredient: PropTypes.String,
-    title: PropTypes.String,
-    removeByName: PropTypes.Function
-    //highlightString: PropTypes.Function
+    steps: PropTypes.array,
+    ingredients: PropTypes.array,
+    keyWords: PropTypes.array,
+    addKeyWord: PropTypes.func,
+    addIngredient: PropTypes.func,
+    addStep: PropTypes.func,
+    onChange: PropTypes.func,
+    tempStep: PropTypes.string,
+    tempKeyWord: PropTypes.string,
+    tempIngredient: PropTypes.string,
+    title: PropTypes.string,
+    removeByName: PropTypes.func,
+    addImageData: PropTypes.func.isRequired
+    //highlightString: PropTypes.func
 };
 
 export default RecipeForm;

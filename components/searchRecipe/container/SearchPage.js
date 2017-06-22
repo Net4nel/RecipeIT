@@ -1,42 +1,47 @@
 import React, {Component} from "react";
 import axios from "axios";
 import Form from "../display/RecipeSearch";
+import Recipe from '../display/Recipe';
+
+const URL = 'http://localhost:3000/api';
 
 export default class SearchPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             tempIngredient: '',
-            ingredients: []
-
+            ingredients: [],
+            recipes: []
         };
 
         this.onChange = this.onChange.bind(this);
         this.addIngredients = this.addIngredients.bind(this);
         this.removeByName = this.removeByName.bind(this);
-
+        this.onSubmit = this.onSubmit.bind(this);
+        this.generateRecipes = this.generateRecipes.bind(this);
     }
 
     /**
-     * @TODO: finish submit function, add validations.
+     * @method onSubmit
+     * @description performs a query to the API with the values of this.state.ingredients
+     * and stores the recipes found on this.state.recipes
+     * @param {object} event object
      */
-    onSubmit() {
-        let url = '/recipe';
+    onSubmit(e) {
+        e.preventDefault();
+        if (!this.state.ingredients.length) return alert('Please add ingredients');
 
-        let valid = true;
+        const query = `?ingredients=${this.state.ingredients.toString()}`;
 
-        let level = this.steps.length;
-
-        let data = {
-            title : this.state.title,
-            keyWords: this.state.keyWords ,
-            level: level
-        };
-        if (valid) {
-            axios.post(url, {data:data}).then((response)=>{
-                console.log(response + 'added new recipe');
+        axios.get(`${URL}/recipes${query}`)
+            .then(res => {
+                this.setState(() => {
+                    return {recipes: res.data.recipes};
+                });
             })
-        }
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     onChange(e) {
@@ -92,9 +97,28 @@ export default class SearchPage extends Component {
                     onChange={this.onChange}
                     title={this.state.title}
                     removeByName={this.removeByName}
+                    submitHandler={this.onSubmit}
                 />
+                <ul className="container">
+                    {this.generateRecipes(this.state.recipes)}
+                </ul>
             </div>
         );
+    }
+    generateRecipes(recipes) {
+        if (!recipes || !recipes.length) return null;
+
+        return recipes.map(recipe => {
+            return (
+                <Recipe key={recipe._id}
+                    name={recipe.name}
+                    ingredients={recipe.ingredients}
+                    properties={recipe.properties}
+                    steps={recipe.steps}
+                    tags={recipe.tags} 
+                    imageData={recipe.imageData} /> 
+            );
+        });
     }
 }
 

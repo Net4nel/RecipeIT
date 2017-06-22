@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import axios from "axios";
 import Form from "../display/RecipeForm";
+import {hasEmptyValues} from '../../../lib/helpers';
+
+const URL = 'http://localhost:3000/api';
 
 export default class Recipe extends Component {
     constructor(props) {
@@ -12,7 +15,9 @@ export default class Recipe extends Component {
             tempKeyword: '',
             steps: [],
             ingredients: [],
-            keyWords: []
+            keyWords: [],
+            properties: [],
+            imageData: {}
         };
 
         this.onChange = this.onChange.bind(this);
@@ -21,28 +26,39 @@ export default class Recipe extends Component {
         this.addStep = this.addStep.bind(this);
         this.removeByName = this.removeByName.bind(this);
         this.highlightString = this.highlightString.bind(this);
+        this.propertiesHandler = this.propertiesHandler.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.addImageData = this.addImageData.bind(this);
     }
 
     /**
-     * @TODO: finish submit function, add validations.
+     * @method onSubmit
+     * @description takes title, keyWords, steps, ingredients and properties. Checks if any value is empty and then
+     * post it to the DB
+     * @param {Object} event object
      */
-    onSubmit() {
-        let url = '/recipe';
+    onSubmit(e) {
+        e.preventDefault();
 
-        let valid = true;
+        const newRecipe = JSON.stringify({
+            name : this.state.title,
+            tags: this.state.keyWords,
+            steps: this.state.steps,
+            ingredients: this.state.ingredients,
+            properties: this.state.properties,
+            imageData: this.state.imageData
+        });
 
-        let level = this.steps.length;
+        if (hasEmptyValues(newRecipe)) return alert('Please fill all fields');
 
-        let data = {
-            title : this.state.title,
-            keyWords: this.state.keyWords ,
-            level: level
-        };
-        if (valid) {
-            axios.post(url, {data:data}).then((response)=>{
-                console.log(response + 'added new recipe');
+        axios
+            .post(`${URL}/recipes`, {newRecipe: newRecipe})
+            .then(() => {
+                console.log('Recipe created!');
             })
-        }
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     onChange(e) {
@@ -142,6 +158,25 @@ export default class Recipe extends Component {
         return _str;
     }
 
+    propertiesHandler(e) {
+        const {value, checked} = e.target;
+
+        if (checked) {
+            return this.setState(({properties}) => {
+                const newProperties = properties.concat(value);
+                return {properties: newProperties};
+            });
+        }
+
+        return this.setState(({properties}) => {
+            const newProperties = properties.filter(property => property !== value);
+            return {properties: newProperties};
+        });
+    }
+    addImageData(imageData) {
+        this.setState(() => {return {imageData: imageData}});
+    }
+
     render() {
         let { steps, ingredients, keyWords} = this.state;
         return (
@@ -160,6 +195,11 @@ export default class Recipe extends Component {
                     title={this.state.title}
                     removeByName={this.removeByName}
                     highlightString={this.highlightString} ////
+                    propertiesHandler={this.propertiesHandler}
+                    imageData={this.state.imageData}
+                    addImageData={this.addImageData}
+                    submitHandler={this.onSubmit}
+
                 />
             </div>
         );
