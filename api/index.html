@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>RecipeIT API</title>
+</head>
+<body>
+	<h1>RecipeIT Endpoints</h1>
+	<ul>
+		<h2>GET</h2>
+		<li>/recipes - get all recipes</li>
+		<li>/ingredients - get all ingredients</li>
+		<li>/units - get all units</li>
+		<li>/properties - get all properties</li>
+		<li>/packs - get all packs</li>
+	</ul>
+	<ul>
+		<h2>POST</h2>
+		<li>/recipes - post a new recipe. Receives a JSON file like 
+			{newRecipe: name: 'name', tags: 'tag1, tag2...', ingredients: 'ing1, ing2...'
+			steps: 'step1, step2...', properties: 'prop1, prop2...'}</li>
+		<li>/properties - post new properties. Recieves a JSON file like 
+			{properties: 'prop1, prop2...'}</li>
+	</ul>
+</body>
+</html>
