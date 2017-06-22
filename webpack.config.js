@@ -65,7 +65,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("[name].style.css")
+        new ExtractTextPlugin("[name].style.css"),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'API_TOKEN': JSON.stringify('NBIDjH3GXmAAAAAAAAAAD0a6qXkZepXhTYEuOIpq17adCuCPDPausRxLP1SzQTIx')
+            }
+        })
     ],
     resolve: {
         root: [

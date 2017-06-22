@@ -1,45 +1,35 @@
-// require('./api/db.js');
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev';
+const serverConfig = require('./.config');
+const PORT = process.env.PORT || serverConfig.PORT[process.env.NODE_ENV] || 3000;
+const apiRoutes = require('./api/api.js');
+const cors = require('cors');
 
 // Connect to webpack
-var webpack = require('webpack')
-var webpackDevMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
-var config = require('./webpack.config')
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackHotMiddleware = require('webpack-hot-middleware');
+var config = require('./webpack.config');
 
 // Connect to express
 var express = require('express');
 var app = express();
-// var bodyParser = require('body-parser');
- // var mongoose = require('mongoose');
 
- // app.use(bodyParser.json());
+var compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.publicPath}));
+app.use(webpackHotMiddleware(compiler));
 
-//
-// // Connect to Mongoose
-//  mongoose.connect('mongodb://localhost/');
-//  var db = mongoose.connection;
+app.use(cors()); // allow cross-origin requests
 
+app.use('/api', apiRoutes);
 
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
 
-// var app = new (require('express'))()
-var port = 3000
-
-var compiler = webpack(config)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
-app.use(webpackHotMiddleware(compiler))
-
-// app.get("/", function(req, res) {
-//     res.sendFile(__dirname + '/index.html')
-// })
-
-app.get("/", function(req, res) {
-    res.sendFile(__dirname + '/index.html')
-})
-
-app.listen(port, function(error) {
+app.listen(PORT, function (error) {
   if (error) {
-    console.error(error)
+    console.error(error);
   } else {
-    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
+    console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', PORT);
   }
-})
+});
