@@ -1,0 +1,89 @@
+.page-wrap{
+    width: 1000px;
+    margin: 0 auto;
+}
+.clear {
+    clear: both;
+}
+.recipe_list_page {
+
+}
+.recipe_list {
+
+}
+.recipe_list_item_img {
+    width: 100%;
+}
+.recipe_list_item {
+    width: 300px;
+    float: right;
+    height: 320px;
+    background: blue;
+    margin: 16px;
+    display: block;
+}
+.recipe_list_item:hover {
+    text-decoration: none;
+}
+.regular-view {
+
+}
+.regular-view-header {
+
+}
+.regular-view-header-right {
+    float: right;
+    width: 40%;
+}
+.regular-view-header-left {
+    float: left;
+    width: 60%;
+}
+.regular-view-steps {
+    width: 100%;
+}
+.regular-view-sub-title {
+    color: green;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.regular-view-recipe-name {
+    font-size: 23px;
+    line-height: 25px;
+    padding-left: 34px;
+    margin-bottom: 12px;
+}
+.regular-view-tag {
+    background: green;
+    margin-left: 10px;
+    border-radius: 4px;
+    color: #fff;
+    padding: 3px 10px;
+}
+.regular-view-tags,.regular-view-ingredients {
+    margin-bottom: 24px;
+    padding-left: 34px;
+}
+.regular-view-img {
+    width: 100%;
+    display: block;
+    border: 6px green solid;
+    border-radius: 5px;
+}
+.regular-view-kitchen-view {
+    background: green;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    margin: 10px 0;
+    padding: 4px 0;
+    cursor: pointer;
+}
+.regular-view-kitchen-view:hover {
+    background: #129312;
+}
+.footer {
+    background: gray;
+    padding: 1px 0;
+    min-height: 163px;
+}

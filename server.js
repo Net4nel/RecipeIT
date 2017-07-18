@@ -22,7 +22,7 @@ app.use(cors()); // allow cross-origin requests
 
 app.use('/api', apiRoutes);
 
-app.get('/', function (req, res) {
+app.get('*', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 

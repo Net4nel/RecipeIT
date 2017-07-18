@@ -1,22 +1,23 @@
-import React, {Component} from "react";
-// import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
+import React, {PropTypes} from "react";
+import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from "react-bootstrap";
+import {Link} from 'react-router';
 
-
-export default class Footer extends Component{
-
-    render(){
-
-
-
-        const footer = (
-            <Footer>
-
+const Footer = ({recipe}) => {
+    return(
+        <div className="footer">
+            <div className="page-wrap">
                 <h1>Footer Tryout</h1>
+            </div>
+        </div>
+    );
+};
 
-            </Footer>
-        );
-        return(footer);
+Footer.propTypes = {
+    //
+};
 
-    }
-}
+
+
+export default Footer;
+
 

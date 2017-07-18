@@ -7,23 +7,31 @@ const models = require('../models/models');
 const DB = require('../.config')[process.env.NODE_ENV];
 
 const units = [
-	new models.Units({name: 'liter'}),
-	new models.Units({name: 'mili-liter'}),
-	new models.Units({name: 'gram'}),
-	new models.Units({name: 'kilo-gram'}),
-	new models.Units({name: 'number'}),
+	new models.Units({name: 'מנה'}),
+	new models.Units({name: 'מ"ל'}),
+	new models.Units({name: 'ליטר'}),
+	new models.Units({name: 'גרם'}),
+	new models.Units({name: 'קילוגרם'}),
+    new models.Units({name: 'כף'}),
+    new models.Units({name: 'כפית'}),
+    new models.Units({name: 'צרור'})
 ];
 
 const properties = [
-	new models.Properties({name: 'spicy'}),
-	new models.Properties({name: 'dairy'}),
-	new models.Properties({name: 'veggie'}),
-	new models.Properties({name: 'super spicy'})
+	new models.Properties({name: 'צמחוני'}),
+	new models.Properties({name: 'טבעוני'}),
+	new models.Properties({name: 'פיקנטי'}),
+	new models.Properties({name: 'ללא גלוטן'}),
+    new models.Properties({name: 'חריף אש!'}),
+    new models.Properties({name: 'דיאטטי'})
 ];
 
 const packs = [
-	new models.Packs({name: 'morning pack'}),
-	new models.Packs({name: 'dessert pack'})
+	new models.Packs({name: 'ארוחות בוקר'}),
+	new models.Packs({name: 'ארוחות ערב'}),
+	new models.Packs({name: 'מסיבת חברים'}),
+    new models.Packs({name: 'ערב רומנטי'}),
+    new models.Packs({name: 'נשנושים'})
 ];
 
 const recipeTag = [

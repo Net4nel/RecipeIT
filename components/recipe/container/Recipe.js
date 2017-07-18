@@ -17,8 +17,21 @@ export default class Recipe extends Component {
             ingredients: [],
             keyWords: [],
             properties: [],
-            imageData: {}
+            imageData: {},
+            tagsList: []
         };
+
+        axios
+            .get(`${URL}/tags`)
+            .then((response) => {
+                this.setState({
+                    tagsList: response.data.tags
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
 
         this.onChange = this.onChange.bind(this);
         this.addKeyWord = this.addKeyWord.bind(this);
@@ -29,6 +42,7 @@ export default class Recipe extends Component {
         this.propertiesHandler = this.propertiesHandler.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.addImageData = this.addImageData.bind(this);
+        this.onAutocompleteChange = this.onAutocompleteChange.bind(this);
     }
 
     /**
@@ -39,6 +53,7 @@ export default class Recipe extends Component {
      */
     onSubmit(e) {
         e.preventDefault();
+
 
         const newRecipe = JSON.stringify({
             name : this.state.title,
@@ -61,6 +76,15 @@ export default class Recipe extends Component {
             });
     }
 
+    onAutocompleteChange(value,type) {
+        switch(type) {
+            case 'tempKeyWord':
+                this.setState({
+                    tempKeyword: value
+                });
+                break;
+        }
+    }
     onChange(e) {
         let input = e.target;
         let name = input.getAttribute('name');
@@ -78,11 +102,6 @@ export default class Recipe extends Component {
             case 'tempStep':
                 this.setState({
                     tempStep: input.value
-                });
-                break;
-            case 'tempKeyWord':
-                this.setState({
-                    tempKeyword: input.value
                 });
                 break;
         }
@@ -107,9 +126,11 @@ export default class Recipe extends Component {
                 break;
             case 'keywords':
                 tempArray = [...this.state.keyWords];
-                tempArray.splice(i,1);
+                let keyword = tempArray.splice(i,1);
+                let newTagsList = [...this.state.tagsList,{label: keyword.pop()}];
                 this.setState({
-                    keyWords: tempArray
+                    keyWords: tempArray,
+                    tagsList: newTagsList
                 });
                 break;
         }
@@ -119,9 +140,11 @@ export default class Recipe extends Component {
         let keywords = this.state.keyWords;
         let keyword = this.state.tempKeyword;
         if (!~keywords.indexOf(keyword)) { // ~ indexOf returns true if exists false if not.
+            let newTagsList = this.state.tagsList.filter((tag)=>tag.label !== keyword);
             this.setState({
                 keyWords: [...this.state.keyWords, keyword],
-                tempKeyword: ''
+                tempKeyword: '',
+                tagsList: newTagsList
             })
         }
     }
@@ -199,7 +222,8 @@ export default class Recipe extends Component {
                     imageData={this.state.imageData}
                     addImageData={this.addImageData}
                     submitHandler={this.onSubmit}
-
+                    tagsList={this.state.tagsList}
+                    onAutocompleteChange={this.onAutocompleteChange}
                 />
             </div>
         );

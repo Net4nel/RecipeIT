@@ -1,6 +1,8 @@
 import React, {PropTypes} from "react";
+import _ from 'lodash';
 //Components:
 import Header from "./common/Header";
+import Footer from "./common/Footer";
 
 
 class App extends React.Component {
@@ -10,9 +12,9 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="root">
                 <Header />
-                <div id="view">
+                <div id="view" className="page-wrap">
                     {this.props.children}
                 </div>
                 {/*<Footer />*/}

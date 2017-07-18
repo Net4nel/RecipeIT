@@ -1,19 +1,35 @@
 import React, {PropTypes} from "react";
 import ImageLoader from './ImageLoader';
+import Autocomplete from 'react-autocomplete';
 
 const RecipeForm = (props) => {
-    let { steps, ingredients, keyWords} = props;
+    let { steps, ingredients, keyWords, tagsList, onAutocompleteChange} = props;
+    let textValues = {
+        newRecipe: 'יצירת מתכון חדש:',
+        name: 'שם המתכון:',
+        tags: 'תגיות:',
+        ingredients: 'הזן מצרכים:',
+        steps: 'שלבי ההכנה:',
+        vegetarian:'צמחוני' ,
+        diet: 'דיאטטי',
+        gluten: 'ללא גלוטן',
+        hot: 'חריף אש!',
+        vegan: 'טבעוני',
+        pikanti:'פינקט',
+        sendRecipe: 'שלח מתכון'
+
+    }
     return(
         <form>
             <div className="row">
                 <fieldset className="col-md-10">
-                    <legend>New Recipe</legend>
+                    <legend>{textValues.newRecipe}</legend>
                     <div className="input-wrapper row">
                         <ImageLoader 
                             name={props.title} 
                             addImageData={props.addImageData} />
                         <div className="col-md-2">
-                            <label>Recipe Name:</label>
+                            <label>{textValues.name}</label>
                         </div>
                         <div className="col-md-10">
                             <input name="title" value={props.title} onChange={props.onChange} type="text" className="form-control" />
@@ -21,10 +37,22 @@ const RecipeForm = (props) => {
                     </div>
                     <div className="input-wrapper row">
                         <div className="col-md-2">
-                            <label>Recipe Tags</label>
+                            <label>{textValues.tags}</label>
                         </div>
-                        <div className="col-md-9">
-                            <input name="tempKeyWord" value={props.tempKeyWord} onChange={props.onChange}  type="text" className="form-control" />
+                        <div className="col-md-2">
+                            <Autocomplete
+                                value={props.tempKeyWord}
+                                items={tagsList}
+                                getItemValue={(item) => item.label}
+                                onChange={(e) => onAutocompleteChange(e.target.value, "tempKeyWord")}
+                                onSelect={(val) => onAutocompleteChange(val, "tempKeyWord")}
+                                renderItem={(item, isHighlighted) =>
+                                    <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                                        {item.label}
+                                    </div>
+                                }
+                                shouldItemRender={(item,value) => item.label.includes(value)}
+                            />
                         </div>
                         <div className="col-md-1">
                             <input type="button" value="+" onClick={props.addKeyWord}/>
@@ -38,10 +66,9 @@ const RecipeForm = (props) => {
                         </ul>
                     </div>
                     <div className="input-wrapper row">
-                        <label>Ingredientes:</label>
-                        <input name="tempIngredient" value={props.tempIngredient} onChange={props.onChange}  type="text" className="form-control" />
-                        <input name="tempIngredientAmount" value={props.tempIngredient} onChange={props.onChange}  type="text" className="form-control" />
-                        <input type="button" value="+" onClick={props.addIngredient}/>
+                        <label>{textValues.ingredients}</label>
+                        <input name="tempIngredient" value={props.tempIngredient} onChange={props.onChange}  type="text" className="ol-md-8" />
+                        <input type="button" value="+" onClick={props.addIngredient} className="ol-md-8"/>
                     </div>
                     <div className="ingredients-wrapper row">
                         <ul className="ingredients-list">
@@ -51,9 +78,9 @@ const RecipeForm = (props) => {
                         </ul>
                     </div>
                     <div className="input-wrapper row">
-                        <label>Recipe Steps:</label>
-                        <input name="tempStep" value={props.tempStep} onChange={props.onChange}  type="text" className="form-control" />
-                        <input type="button" value="+" onClick={props.addStep} />
+                        <label>{textValues.steps}</label>
+                        <input name="tempStep" value={props.tempStep} onChange={props.onChange}  type="text" className="ol-md-10" />
+                        <input type="button" value="+" onClick={props.addStep} className="ol-md-10" />
                     </div>
                     <div className="steps-wrapper row">
                         <ol className="steps-list">
@@ -65,23 +92,35 @@ const RecipeForm = (props) => {
 
                     <div className="input-wrapper row">
                         <div className="col-md-3">
-                            Spicy <input type="checkbox" onChange={props.propertiesHandler} value="Spicy"/>
+                             <input type="checkbox" className="checkbox-test" onChange={props.propertiesHandler} value="Vegetarian"/> {textValues.vegetarian}
                         </div>
                         <div className="col-md-3">
-                            !Hot <input type="checkbox" onChange={props.propertiesHandler} value="Hot"/>
+                             <input type="checkbox" onChange={props.propertiesHandler} value="Pikanti"/> {textValues.pikanti}
+                        </div>
+                    </div>
+
+                    <div className="input-wrapper row">
+                        <div className="col-md-3">
+                             <input type="checkbox" onChange={props.propertiesHandler} value="Vegan"/> {textValues.vegan}
                         </div>
                         <div className="col-md-3">
-                            Veggie <input type="checkbox" onChange={props.propertiesHandler} value="Veggie"/>
+                             <input type="checkbox" onChange={props.propertiesHandler} value="HOT"/> {textValues.hot}
+                        </div>
+                    </div>
+
+                    <div className="input-wrapper row">
+                        <div className="col-md-3">
+                             <input type="checkbox" onChange={props.propertiesHandler} value="Gluten"/> {textValues.gluten}
                         </div>
                         <div className="col-md-3">
-                            Healthy <input type="checkbox" onChange={props.propertiesHandler} value="Healthy"/>
+                             <input type="checkbox" onChange={props.propertiesHandler} value="Diet"/> {textValues.diet}
                         </div>
                     </div>
                 </fieldset>
 
             </div>
             <div className="row">
-                <input className="btn btn-success" type="button" onClick={props.submitHandler} value="Send Recipe" />
+                <input className="btn btn-success" type="button" onClick={props.submitHandler} value={textValues.sendRecipe} />
             </div>
         </form>
     );
@@ -100,7 +139,9 @@ RecipeForm.propTypes = {
     tempIngredient: PropTypes.string,
     title: PropTypes.string,
     removeByName: PropTypes.func,
-    addImageData: PropTypes.func.isRequired
+    addImageData: PropTypes.func.isRequired,
+    tagsList: PropTypes.array,
+    onAutocompleteChange: PropTypes.func
     //highlightString: PropTypes.func
 };
 

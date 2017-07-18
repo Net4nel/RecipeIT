@@ -13,7 +13,7 @@ class ImageLoader extends Component {
 	}
 	render() {
 		return (
-			<section>
+			<section className="dropzone2">
 				<div className="dropzone">
 					<Dropzone
 						accept="image/jpeg, image/png"
@@ -22,16 +22,20 @@ class ImageLoader extends Component {
 						{this.generateMessageOrImage(this.state.accepted)}
 					</Dropzone>
 				</div>
-				<button onClick={this.submitImage}>Upload</button>
+				<button onClick={this.submitImage}>העלה</button>
 			</section>
 		);
 	}
 	generateMessageOrImage(acceptedFiles) {
 		if (!acceptedFiles.length) {
 			return (
-				<div>
-					<p>Try dropping some files here, or click to select files to upload.</p>
-					<p>Only *.jpeg and *.png images will be accepted</p>
+				<div className="img-dropzone-text">
+					<p>העלה תמונה</p>
+					<p>לחץ כאן או גרור תמונה</p>
+					<p> </p>
+					<p> </p>
+					<p>JPEG / PNG</p>
+					<p>בלבד</p>
 				</div>
 			);
 		}
@@ -40,14 +44,16 @@ class ImageLoader extends Component {
 			<img style={{ maxWidth: '100%' }} src={this.state.accepted[0].preview} alt="uploaded image" />
 		);
 	}
+
 	submitImage(e) {
 		e.preventDefault();
 		if (!this.props.name) return alert('Please insert a recipe name first');
 
 		const file = this.state.accepted[0];
 		const extension = file.name.match(/\.(jpg)|\.(png)|\.(jpeg)/, 'g')[0];
-		const fileName = this.props.name + extension;
-		
+		// const fileName = this.props.name + extension;
+        const fileName = '1' + extension;
+
 		const config = {
 			headers: { 
 				'Authorization': 'Bearer ' + process.env.API_TOKEN,
@@ -55,6 +61,7 @@ class ImageLoader extends Component {
 				'Dropbox-API-Arg': `{"path": "/${fileName}","mode": "add","autorename": true,"mute": false}`
 			}
 		};
+
 
 		axios
 			.post('https://content.dropboxapi.com/2/files/upload', this.state.accepted[0], config)
@@ -67,7 +74,7 @@ class ImageLoader extends Component {
 			})
 			.catch(err => {
 				console.dir(err);
-				alert('Wops! Something went wrong with the upload. Please try again');
+				alert('מצטערים, הייתה בעיה בהעלאה, בבקשה נסה שוב');
 			});
 
 

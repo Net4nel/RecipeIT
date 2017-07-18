@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Form from "../display/RecipeSearch";
-import Recipe from '../display/Recipe';
 
 const URL = 'http://localhost:3000/api';
+
+import Form from "../display/RecipeSearch";
+import Recipe from '../display/Recipe';
+import RecipeList from 'components/recipeList/display/RecipeList';
+
 
 export default class SearchPage extends Component {
     constructor(props) {
@@ -99,9 +102,10 @@ export default class SearchPage extends Component {
                     removeByName={this.removeByName}
                     submitHandler={this.onSubmit}
                 />
-                <ul className="container">
+                <RecipeList recipes={this.state.recipes} />
+                {/*<ul className="container">
                     {this.generateRecipes(this.state.recipes)}
-                </ul>
+                </ul>*/}
             </div>
         );
     }

@@ -21,11 +21,13 @@ router.route('/').get((req, res) => {
   res.status(200).sendFile(__dirname + '/index.html');
 });
 
+router.route('/recipes/:id').get(get.getRecipeById);
 router.route('/recipes').get(get.getRecipes);
 router.route('/ingredients').get(get.getIngredients);
 router.route('/units').get(get.getUnits);
 router.route('/properties').get(get.getProperties);
 router.route('/packs').get(get.getPacks);
+router.route('/tags').get(get.getTags);
 
 router.use(bodyParser.json());
 

@@ -1,34 +1,282 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+
     <!--Bootstrap:-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
-    
+
 
     <!--React Slick-->
-   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 
+    <!--Css-->
+    <link rel="stylesheet" type="text/css" href="views/css/styles.css" media="screen" />
     <!--Temporary style section-->
-    <style> 
-      #root{ 
-          width: 1000px;
-          margin: 0 auto;
-      }
-    </style>
+    <!--<style>-->
+        <!--#root{-->
 
-    <title>Basic React example</title>
+        <!--}-->
+    <!--</style>-->
+
+    <title>RecipeIT</title>
 
     <!--Favicon-->
     <link rel="shortcut icon" href="http://www.iconj.com/ico/b/s/bsxjoxt80b.ico" type="image/x-icon" />
 
-  </head>
-  <body>
-    <div id="root">
-        <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
-    </div>
+</head>
+<body>
+<div id="root">
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+</div>
 
-    <script src="/app.bundle.js"></script>
-  </body>
+<script src="/app.bundle.js"></script>
+
+<style>
+    .root{
+        background-image: url("http://i63.tinypic.com/16hokmw.png");
+        /*background-image: url("https://s-media-cache-ak0.pinimg.com/originals/6b/e1/84/6be1847b56e3832a614699142d1e09d8.jpg");*/
+        height: 731px;
+    }
+    #view {
+        background: rgba(165, 214, 167, 0.8);
+    }
+    .back-wrapper-mid-page{
+        background: rgba(165, 214, 167, 0.8);
+        margin: -5px;
+        padding-right: 3px;
+        padding-top: 24px;
+        padding-bottom: 17px;
+    }
+    .wrapper-mid-page{
+        opacity: initial;
+    }
+    .slider-img{
+        padding-right: 28px;
+        padding-top: 2px;
+    }
+    .click-here-for-recipe{
+        text-align: center;
+        font-size: 24px;
+        font-weight: bolder;
+        text-decoration: underline;
+        color: white;
+        position: absolute;
+        top: 271px;
+        padding-right: 343px;
+    }
+    .click-here-for-recipe:link{
+        color: white;
+    }
+    .page-wrap{
+        width: 1000px;
+        margin: 0 auto;
+    }
+    .clear {
+        clear: both;
+    }
+    .recipe_list_page {
+
+    }
+    .recipe_list {
+
+    }
+    .recipe_list_item_img {
+        width: 100%;
+    }
+    .recipe_list_item:hover {
+        text-decoration: none;
+    }
+    .regular-view {
+
+    }
+    .regular-view-header {
+
+    }
+    .regular-view-header-right {
+        float: right;
+        width: 50%;
+    }
+    .regular-view-header-left {
+        float: left;
+        width: 50%;
+    }
+    .regular-view-steps {
+        width: 100%;
+        line-height: 24px;
+        font-size: 17px;
+
+    }
+    .regular-view-sub-title {
+        color: green;
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .regular-view-recipe-name {
+        font-size: 23px;
+        line-height: 25px;
+        padding-left: 34px;
+        margin-bottom: 12px;
+    }
+    .regular-view-tag {
+        background: green;
+        margin-left: 10px;
+        border-radius: 4px;
+        color: #fff;
+        padding: 3px 10px;
+    }
+    .regular-view-tags,.regular-view-ingredients {
+        margin-bottom: 24px;
+        padding-left: 34px;
+        font-size: 17px;
+    }
+    .regular-view-img {
+        width: 100%;
+        display: block;
+        border: 6px green solid;
+        border-radius: 5px;
+    }
+    .regular-view-kitchen-view {
+        background: green;
+        color: #fff;
+        text-align: center;
+        font-size: 30px;
+        margin: 10px 0;
+        padding: 4px 0;
+        cursor: pointer;
+    }
+    .regular-view-kitchen-view:hover {
+        background: #006613;
+    }
+    .kitchen-view {
+        background: rgba(47, 195, 47, 0.5);
+        box-shadow: 1px 1px 14px grey;
+    }
+    .kitchen-view-img {
+        width: 33%;
+        display: block;
+        float: left;
+        border: 6px green solid;
+        border-radius: 5px;
+        height: 212px;
+        margin-left: -111px;
+    }
+    .kitchen-view-regular-view {
+        background: #329628;
+        float: left;
+        padding-left: 52px;
+        padding-right: 52px;
+        padding-top: 37px;
+        padding-bottom: 37px;
+        border-radius: 50%;
+        box-shadow: 3px 3px 6px #575757;
+        color: white;
+        margin: 10px;
+        font-size: 35px;
+        font-weight: bold;
+    }
+    .kitchen-view-recipe-name{
+        font-size: 48px;
+        padding-right: 20px;
+    }
+    .kitchen-view-sub-title {
+        color: white;
+        font-size: 28px;
+        line-height: 35px;
+        padding-top: 20px;
+        padding-bottom: 12px;
+    }
+    .kitchen-view-ingredients {
+        width: 66%;
+        line-height: 28px;
+        font-size: 24px;
+        padding-right: 20px;
+    }
+    .kitchen-view-move-step{
+        height: 125px;
+    }
+    .kitchen-view-move-step-back {
+        float: left;
+        background: #329628;
+        padding-left: 52px;
+        padding-right: 52px;
+        padding-top: 37px;
+        padding-bottom: 37px;
+        border-radius: 50%;
+        box-shadow: 3px 3px 6px #575757;
+        color: white;
+        margin: 10px;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    .kitchen-view-move-step-back:hover {
+        background: #006613;
+    }
+    .kitchen-view-move-step-forward {
+        float: left;
+        background: #329628;
+        padding-left: 52px;
+        padding-right: 52px;
+        padding-top: 37px;
+        padding-bottom: 37px;
+        border-radius: 50%;
+        box-shadow: 3px 3px 6px #575757;
+        color: white;
+        margin: 10px;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    .kitchen-view-move-step-back:hover {
+        background: #006613;
+    }
+    .kitchen-view-step-status {
+        color: white;
+        font-size: 28px;
+        padding-right: 398px;
+    }
+
+    .kitchen-view-step {
+        width: 80%;
+        font-size: 58px;
+        padding-right: 22px;
+        padding-bottom: 6px;
+    }
+    .recipe_list_item {
+        width: 300px;
+        float: right;
+        height: 320px;
+        background: #32b451;
+        margin: 16px;
+        display: block;
+        border-radius: 79px;
+        font-size: 28px;
+        color: white;
+        text-align: center;
+        padding-top: 20px;
+    }
+
+    .footer {
+        background: darkgray;
+        padding: 1px 0;
+        min-height: 121px;
+    }
+    .recipe_list_item_img{
+        width: 95%;
+        height: 62%;
+        border-radius: 71px;
+        border: 7px white solid;
+    }
+
+
+    .click-here-for-recipe a {
+        color: white;
+    }
+
+    .click-here-for-recipe a:hover {
+        color: #B3E5FC;
+    }
+
+</style>
+</body>
 </html>

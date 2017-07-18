@@ -1,5 +1,6 @@
 const {Recipes, Ingredients, Units, Properties, Packs, RecipeIngredient, RecipeProperty, RecipeTag} = require('../../DB/models/models');
 const async = require('async');
+var ObjectId = require('mongodb').ObjectId
 
 const {findMatchingKeys} = require('../../lib/helpers');
 
@@ -36,7 +37,7 @@ const getRecipes = (req, res, next) => {
 						wholeRecipe.ingredients = data[0];
 						wholeRecipe.properties = data[1];
 						wholeRecipe.tags = data[2];
-						
+
 						next(null, wholeRecipe);
 					});
 				}, (err, recipes) => {
@@ -48,6 +49,24 @@ const getRecipes = (req, res, next) => {
 
 	return res.status(400).send({reason: 'Invalid query'});
 };
+
+const getRecipeById = (req, res, next) => {
+    Recipes.findOne({_id: req.params.id}, (err, recipe) => {
+        const id = req.params.id;
+        async.parallel([
+            getIngredientsByRecipe.bind(null, id),
+            getPropertiesByRecipe.bind(null, id),
+            getTagsByRecipe.bind(null, id)
+        ], (err, data) => {
+            const wholeRecipe = recipe.toObject();
+            wholeRecipe.ingredients = data[0];
+            wholeRecipe.properties = data[1];
+            wholeRecipe.tags = data[2];
+            return err ? next(err) : res.status(200).send({recipes: wholeRecipe});
+        });
+    });
+};
+
 
 /**
  * @method getIngredientsIds
@@ -140,6 +159,26 @@ const getTagsByRecipe = (recipeId, done) => {
 	});
 };
 
+const getTags = (req, res, next) => {
+    RecipeTag.find({}, (err, tags) => {
+    	let tagsOptions = [];
+		tags = JSON.parse(JSON.stringify(tags.pop()));
+
+        for (let key in tags) {
+            if (tags.hasOwnProperty(key)) {
+                if (!(~["_id","name","__v","$__"].indexOf(key))) {
+                    tags[key].forEach((_tag)=>{
+                		tagsOptions.push({label:_tag});
+					})
+				}
+            }
+        }
+
+        return err ? next(err) : res.status(200).send({tags: tagsOptions});
+    });
+};
+
+
 const getRecipeProperty = (done) => {
 	RecipeProperty.findOne({name: 'recipeProperty'}, (err, recipeProperty) => {
 		return err ? done(err) : done(null, recipeProperty);
@@ -179,5 +218,7 @@ module.exports = {
 	getPropertiesIds,
 	getPacks,
 	getRecipeIngredient,
-	getRecipeProperty
+	getRecipeProperty,
+    getTags,
+    getRecipeById
 };

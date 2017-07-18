@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import {hashHistory, Router} from "react-router";
+import {browserHistory, Router} from "react-router";
 // Router:
 import routes from "./routes/routes";
 //Components:
@@ -10,17 +10,17 @@ import Header from "./components/common/Header";
 //Pages:
 
 export default class App extends Component{
-  render(){
+    render(){
 
-    return(
-      <div>
-         <Header />
-          <div id="view">
-              {this.props.children}
-          </div>
-      </div>
-    );
-  }
+        return(
+            <div>
+                <Header />
+                <div id="view">
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
 
 }
 // const root = document.getElementById('root');
@@ -31,11 +31,7 @@ export default class App extends Component{
 const root = document.getElementById('root');
 ReactDOM.render(
     (
-     <Router history={hashHistory} routes={routes}>
-         {/*<Route path="/" component={HomePage}>*/}
-            {/*<Route path="/tips" component={}/>*/}
-            {/*<Route path="/about" component={}/>*/}
-         {/*</Route>*/}
-     </Router>
+        <Router history={browserHistory} routes={routes}>
+        </Router>
     )
     ,root)
